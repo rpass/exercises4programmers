@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../lib/angular.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script src="../src/Exercise7.js"></script>
+    <script src="../src/Exercise7App.js"></script>
+    <meta charset="UTF-8">
+    <title>Exercise 7: Rectangular Room Area Calculator</title>
+</head>
+<body>
+<div class="container">
+    <h3>Exercise 7: Room Area Calculator</h3>
+    <div ng-app="Exercise7App" ng-controller="logicController as logicCtrl">
+        <div class="form-group">
+            <h5>Please enter the room's width:</h5>
+            <input type="number" ng-model="logicCtrl.roomWidth">
+            <h5>Please enter the room's length:</h5>
+            <input type="number" ng-model="logicCtrl.roomLength">
+        </div>
+
+        <div>
+            <h5>You entered dimensions of <b>{{logicCtrl.roomWidth}}</b> feet by <b>{{logicCtrl.roomLength}}</b> feet
+            </h5>
+        </div>
+        <div>
+            <h5>The area is:</h5>
+            <p><b>{{logicCtrl.calcArea()}} f2</b></p>
+            <h5>or</h5>
+            <p><b>{{logicCtrl.convertF2toM2()}} m2</b></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
