@@ -9,7 +9,10 @@
     <script src="../node_modules/angular/angular.min.js"></script>
 
     <script src="ExercisesForProgrammersApp.js"></script>
+    <script src="ExercisesForProgrammers.TabController.js"></script>
     <script src="Exercise7/AreaCalculatorController.js"></script>
+    <script src="Exercise7/Exercise7Directive.js"></script>
+    <script src="Exercise8/Exercise8Directive.js"></script>
 
     <!-- Visible elements -->
     <title>Exercises for Programmers</title>
@@ -18,41 +21,24 @@
 <div class="container">
     <h1 class="text-center">Welcome to Rob's <br>'Exercises for Programmers' <br>Solution Page</h1>
 </div>
-<!-- Exercise 7 -->
-<div ng-controller="AreaCalculatorController as areaCalcCtrl"
-     class="text-center">
-
-    <h4>Exercise 7: Area Calculator</h4>
-    <form>
-        <h5>Select Units of Input:</h5>
-        <div>
-            <label for="ImperialOption">
-                <input type="radio" name="options" id="ImperialOption" ng-model="areaCalcCtrl.InputUnitType"
-                       value="Imperial" checked> Imperial Units
-            </label>
-            <br>
-            <label for="MetricOption">
-                <input type="radio" name="options" id="MetricOption" ng-model="areaCalcCtrl.InputUnitType"
-                       value="Metric"> Metric Units
-            </label>
-        </div>
-        <br>
-        <label for="length">Length:
-            <input type="number" id="length" ng-model="areaCalcCtrl.RoomLength">
-        </label>
-        <br>
-        <label for="width">Width:
-            <input type="number" id="width" ng-model="areaCalcCtrl.RoomWidth">
-        </label>
-        <p>You entered dimensions of {{areaCalcCtrl.RoomLength}} by {{areaCalcCtrl.RoomWidth}} feet.</p>
-        <p>The area of the room is:
-            <br>{{areaCalcCtrl.CalculateRoomArea('Imperial')}} <br><i>square feet</i>
-            <br><i><b>or</b></i>
-            <br>{{areaCalcCtrl.CalculateRoomArea('Metric')}} <br><i>square metres</i>
-        </p>
-        <p>The formula for this conversion is:
-            <br>m2 = f2 x 0.09290304</p>
-    </form>
+<div ng-controller="TabController as tabCtrl">
+    <ul class="nav nav-tabs"
+        ng-model="tabCtrl.activeTab">
+        <li ng-repeat="tab in tabCtrl.tabs"
+            role="presentation"
+            ng-click="tabCtrl.setActiveTab(tab)"
+            ng-class="{'active': tab === tabCtrl.activeTab}">
+            <a href="#">Ex {{tab}}</a>
+        </li>
+        <!--<li role="presentation" ng-repeat="exercise in tabCtrl.exercises"-->
+        <!--onclick="tabCtrl.setActiveTab($index)"-->
+        <!--ng-class="{active: $index === 1"><a href="#">Ex 7</a></li>-->
+        <!--<li role="presentation"><a href="#">Ex 8</a></li>-->
+        <!--<li role="presentation"><a href="#">Ex 9</a></li>-->
+    </ul>
+    <!-- Exercise 7 -->
+    <exercise7 ng-show="tabCtrl.activeTab === '7'"></exercise7>
+    <exercise8 ng-show="tabCtrl.activeTab === '8'"></exercise8>
 
 </div>
 </body>

@@ -1,0 +1,35 @@
+<div ng-controller="AreaCalculatorController as areaCalcCtrl"
+     class="text-center">
+
+    <h4>Exercise 7: Area Calculator</h4>
+    <form>
+        <h5>Select Units of Input:</h5>
+        <div>
+            <label for="ImperialOption">
+                <input type="radio" name="options" id="ImperialOption" ng-model="areaCalcCtrl.InputUnitType"
+                       value="Imperial" checked> Imperial Units
+            </label>
+            <br>
+            <label for="MetricOption">
+                <input type="radio" name="options" id="MetricOption" ng-model="areaCalcCtrl.InputUnitType"
+                       value="Metric"> Metric Units
+            </label>
+        </div>
+        <br>
+        <label for="length">Length:
+            <input type="number" id="length" ng-model="areaCalcCtrl.RoomLength">
+        </label>
+        <br>
+        <label for="width">Width:
+            <input type="number" id="width" ng-model="areaCalcCtrl.RoomWidth">
+        </label>
+        <p>You entered dimensions of {{areaCalcCtrl.RoomLength}} by {{areaCalcCtrl.RoomWidth}} feet.</p>
+        <p>The area of the room is:
+            <br>{{areaCalcCtrl.CalculateRoomArea('Imperial')}} <br><i>square feet</i>
+            <br><i><b>or</b></i>
+            <br>{{areaCalcCtrl.CalculateRoomArea('Metric')}} <br><i>square metres</i>
+        </p>
+        <p>The formula for this conversion is:
+            <br>m2 = f2 x 0.09290304</p>
+    </form>
+</div>
