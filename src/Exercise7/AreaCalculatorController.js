@@ -1,10 +1,12 @@
 /**
  * Created by robert.passmore on 2016/02/15.
+ * copyright
  */
 // Get instance of angular module
 angular.module('ExercisesForProgrammersApp')
     .controller('AreaCalculatorController', function () {
         var self = this;
+        //@todo: rename
         const f2tom2Factor = 0.09290304;
         self.InputUnitType = 'Imperial';
         self.RoomLength = 0;
