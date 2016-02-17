@@ -1,21 +1,72 @@
-<div class="text-center" ng-controller="PizzaPartyController as ppCtrl">
-    <h4>Exercise 8: xyz</h4>
-    <form>
-        <label for="peopleCount">How many People?
-            <input type="text" id="peopleCount" ng-model="ppCtrl.peopleCount">
-        </label>
-        <br>
-        <label for="pizzaCount">How many Pizzas?
-            <input type="text" id="pizzaCount" ng-model="ppCtrl.pizzaCount">
-        </label>
-        <br>
-        <label for="sliceCount">How many slices per Pizza?
-            <input type="text" id="sliceCount" ng-model="ppCtrl.sliceCount">
-        </label>
-    </form>
+<div class="text-center" ng-controller="pageController as pageCtrl">
+    <h4>Exercise 8: Pizza Party</h4>
     <div>
-        <p>{{ppCtrl.peopleCount}} people with {{ppCtrl.pizzaCount}} pizzas.</p>
-        <p>Each person gets {{ppCtrl.slicesPerPerson}} pieces of pizza.</p>
-        <p>There are {{ppCtrl.leftOverCount}} left.</p>
+        <!-- Option Button Group -->
+        <ul class="btn-group-sm">
+            <li class="btn btn-primary active"
+                ng-click="pageCtrl.setActiveCalculator('Sharing')"
+                ng-class="{'active': pageCtrl.activeCalculator === 'Sharing'}">Sharing Pizzas</li>
+            <li class="btn btn-primary"
+                ng-click="pageCtrl.setActiveCalculator('Ordering')"
+                ng-class="{'active': pageCtrl.activeCalculator === 'Ordering'}">Ordering Pizzas</li>
+        </ul>
+
+        <!-- Questions & Results -->
+        <div ng-controller="PizzaPartyController as ppCtrl">
+            <form name="pizzaForm">
+                <!-- People Count Input-->
+                <label for="peopleCount">How many People?
+                    <input type="number" min="0" id="peopleCount" ng-model="ppCtrl.peopleCount" required
+                           ng-change="ppCtrl.recalculate()">
+                </label>
+                <br>
+
+                <!-- Pizza Count Input-->
+                <label for="pizzaCount"
+                       ng-show="pCtrl.activeCalculator === 'Sharing'"> How many Pizzas?
+                    <input type="number" id="pizzaCount"
+                           min="0" ng-model="ppCtrl.pizzaCount"
+                           ng-change="ppCtrl.recalculate()">
+                </label>
+
+                <!-- Slices Wanted Per Person Input -->
+                <label for="slicesWantedPerPerson"
+                       ng-show="pCtrl.activeCalculator === 'Ordering'">How many slices per person?
+                    <input type="number" id="slicesWantedPerPerson"
+                           min="0" ng-model="ppCtrl.slicesWantedPerPerson"
+                           ng-change="ppCtrl.calculatePizzasNeeded()">
+                </label>
+                <br>
+
+                <!-- Slices per Pizza Input -->
+                <label for="slicesPerPizza">How many slices per Pizza?
+                    <input type="number" min="0" id="slicesPerPizza" name="slicesPerPizza"
+                           ng-model="ppCtrl.slicesPerPizza" required even-number
+                           ng-change="ppCtrl.recalculate()">
+                    <br>
+            <span ng-show="pizzaForm.slicesPerPizza.$error.evenNumber">
+                The number of slices per pizza must be even!
+            </span>
+                </label>
+                <br>
+
+            </form>
+
+            <!-- Result Block-->
+            <div ng-show="pizzaForm.$valid && ppCtrl.peopleCount > 0
+                    && ppCtrl.pizzaCount > 0
+                    && ppCtrl.slicesPerPizza > 0">
+                <p>{{ppCtrl.peopleCount}} people with {{ppCtrl.pizzaCount}} pizzas.</p>
+                <p ng-show="pCtrl.activeCalculator === 'Sharing'">Each person gets {{ppCtrl.slicesPerPerson}} {{ ppCtrl.slicesPerPerson !== 1 ? 'slices' : 'slice'}} of
+                    pizza.</p>
+                <p ng-show="pCtrl.activeCalculator === 'Ordering'">Each person wants {{ppCtrl.slicesWantedPerPerson}} {{ ppCtrl.slicesWantedPerPerson !== 1 ? 'slices' : 'slice'}} of
+                    pizza.</p>
+                <p>There {{ (ppCtrl.leftOverCount === 1 ? 'is % slice' : 'are % slices').replace('%',
+                    ppCtrl.leftOverCount) }}
+                    left over.</p>
+            </div>
+        </div>
     </div>
+
+
 </div>
