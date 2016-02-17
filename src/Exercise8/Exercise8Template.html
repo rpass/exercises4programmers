@@ -1,5 +1,21 @@
-<div class="text-center">
-
+<div class="text-center" ng-controller="PizzaPartyController as ppCtrl">
     <h4>Exercise 8: xyz</h4>
-
+    <form>
+        <label for="peopleCount">How many People?
+            <input type="text" id="peopleCount" ng-model="ppCtrl.peopleCount">
+        </label>
+        <br>
+        <label for="pizzaCount">How many Pizzas?
+            <input type="text" id="pizzaCount" ng-model="ppCtrl.pizzaCount">
+        </label>
+        <br>
+        <label for="sliceCount">How many slices per Pizza?
+            <input type="text" id="sliceCount" ng-model="ppCtrl.sliceCount">
+        </label>
+    </form>
+    <div>
+        <p>{{ppCtrl.peopleCount}} people with {{ppCtrl.pizzaCount}} pizzas.</p>
+        <p>Each person gets {{ppCtrl.slicesPerPerson}} pieces of pizza.</p>
+        <p>There are {{ppCtrl.leftOverCount}} left.</p>
+    </div>
 </div>
