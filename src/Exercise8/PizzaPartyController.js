@@ -12,15 +12,24 @@ angular.module('ExercisesForProgrammersApp')
         self.slicesWantedPerPerson = 0;
 
         self.recalculate = function () {
-            self.calculateSlicesPP();
+            if(self.pizzaCount === 0){
+                self.calculateSlicesPP();
+            } else if(self.slicesWantedPerPerson){
+                self.calculatePizzasNeeded();
+            }
             self.calculateLeftoverSlices();
         };
 
         self.calculateLeftoverSlices = function () {
             var totalSlices = self.pizzaCount * self.slicesPerPizza;
             var slicesEaten = self.slicesPerPerson * self.peopleCount;
+            var slicesWanted = self.slicesWantedPerPerson * self.peopleCount;
 
-            self.leftOverCount = Number.isInteger(self.slicesPerPerson) ? totalSlices - slicesEaten : 0;
+            if(slicesWanted === 0){
+                self.leftOverCount = Number.isInteger(self.slicesPerPerson) ? totalSlices - slicesEaten : 0;
+            } else {
+                self.leftOverCount = Number.isInteger(self.slicesPerPerson) ? totalSlices - slicesWanted : 0;
+            }
         };
 
         self.calculateSlicesPP = function () {

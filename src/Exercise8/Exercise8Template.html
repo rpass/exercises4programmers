@@ -2,13 +2,15 @@
     <h4>Exercise 8: Pizza Party</h4>
     <div>
         <!-- Option Button Group -->
-        <ul class="btn-group-sm">
+        <ul class="btn-group-sm" ng-model="pageCtrl.activeCalculator">
             <li class="btn btn-primary active"
-                ng-click="pageCtrl.setActiveCalculator('Sharing')"
-                ng-class="{'active': pageCtrl.activeCalculator === 'Sharing'}">Sharing Pizzas</li>
+                ng-click="pageCtrl.activeCalculator = 'Sharing'"
+                ng-class="{'active': pageCtrl.activeCalculator === 'Sharing'}">Sharing Pizzas
+            </li>
             <li class="btn btn-primary"
-                ng-click="pageCtrl.setActiveCalculator('Ordering')"
-                ng-class="{'active': pageCtrl.activeCalculator === 'Ordering'}">Ordering Pizzas</li>
+                ng-click="pageCtrl.activeCalculator = 'Ordering'"
+                ng-class="{'active': pageCtrl.activeCalculator === 'Ordering'}">Ordering Pizzas
+            </li>
         </ul>
 
         <!-- Questions & Results -->
@@ -23,7 +25,7 @@
 
                 <!-- Pizza Count Input-->
                 <label for="pizzaCount"
-                       ng-show="pCtrl.activeCalculator === 'Sharing'"> How many Pizzas?
+                       ng-show="true"> How many Pizzas?
                     <input type="number" id="pizzaCount"
                            min="0" ng-model="ppCtrl.pizzaCount"
                            ng-change="ppCtrl.recalculate()">
@@ -31,7 +33,7 @@
 
                 <!-- Slices Wanted Per Person Input -->
                 <label for="slicesWantedPerPerson"
-                       ng-show="pCtrl.activeCalculator === 'Ordering'">How many slices per person?
+                       ng-show="true">How many slices per person?
                     <input type="number" id="slicesWantedPerPerson"
                            min="0" ng-model="ppCtrl.slicesWantedPerPerson"
                            ng-change="ppCtrl.calculatePizzasNeeded()">
@@ -57,9 +59,11 @@
                     && ppCtrl.pizzaCount > 0
                     && ppCtrl.slicesPerPizza > 0">
                 <p>{{ppCtrl.peopleCount}} people with {{ppCtrl.pizzaCount}} pizzas.</p>
-                <p ng-show="pCtrl.activeCalculator === 'Sharing'">Each person gets {{ppCtrl.slicesPerPerson}} {{ ppCtrl.slicesPerPerson !== 1 ? 'slices' : 'slice'}} of
+                <p ng-show="pCtrl.activeCalculator === 'Sharing'">Each person gets {{ppCtrl.slicesPerPerson}} {{
+                    ppCtrl.slicesPerPerson !== 1 ? 'slices' : 'slice'}} of
                     pizza.</p>
-                <p ng-show="pCtrl.activeCalculator === 'Ordering'">Each person wants {{ppCtrl.slicesWantedPerPerson}} {{ ppCtrl.slicesWantedPerPerson !== 1 ? 'slices' : 'slice'}} of
+                <p ng-show="pCtrl.activeCalculator === 'Ordering'">Each person wants {{ppCtrl.slicesWantedPerPerson}} {{
+                    ppCtrl.slicesWantedPerPerson !== 1 ? 'slices' : 'slice'}} of
                     pizza.</p>
                 <p>There {{ (ppCtrl.leftOverCount === 1 ? 'is % slice' : 'are % slices').replace('%',
                     ppCtrl.leftOverCount) }}

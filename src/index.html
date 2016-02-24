@@ -13,9 +13,11 @@
     <script src="Exercise7/AreaCalculatorController.js"></script>
     <script src="Exercise7/Exercise7Directive.js"></script>
     <script src="Exercise8/PizzaPartyController.js"></script>
-    <script src="Exercise8/Exercise8.EvenNumberValidationDirective.js"></script>
-    <script src="Exercise8/Exercise8Directive.js"></script>
     <script src="Exercise8/Exercise8Controller.js"></script>
+    <script src="Exercise8/Exercise8Directive.js"></script>
+    <script src="Exercise8/Exercise8.EvenNumberValidationDirective.js"></script>
+    <!--<script src="Exercise8/Exercise8Controller.js"></script>-->
+
 
     <!-- Visible elements -->
     <title>Exercises for Programmers</title>
@@ -25,6 +27,7 @@
     <h1 class="text-center">Welcome to Rob's <br>'Exercises for Programmers' <br>Solution Page</h1>
 </div>
 <div ng-controller="TabController as tabCtrl">
+
     <ul class="nav nav-tabs"
         ng-model="tabCtrl.activeTab">
         <li ng-repeat="tab in tabCtrl.tabs"
